@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2017-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 // See https://docusaurus.io/docs/site-config for all the possible
 // site configuration options.
 
@@ -22,19 +15,19 @@ const users = [
 
 const siteConfig = {
   title: 'zio-diffx',
-  tagline: 'TODO: Tagline',
-  url: 'https://zio.github.io',
+  tagline: 'Simple diffx integration with zio-test',
+  url: 'https://bbarker.github.io',
   baseUrl: '/zio-diffx/',
 
   projectName: 'zio-diffx',
-  organizationName: 'zio',
+  organizationName: 'bbarker',
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    {doc: 'overview/overview_index', label: 'Overview'},
-    {doc: 'usecases/usecases_index', label: 'Use Cases'},
-    {href: 'api/index.html', label: 'API'},
-    {doc: 'about/about_index', label: 'About'}
+    { doc: 'overview/overview_index', label: 'Overview' },
+    { doc: 'usecases/usecases_index', label: 'Use Cases' },
+    { href: 'api/index.html', label: 'API' },
+    { doc: 'about/about_index', label: 'About' }
   ],
 
   // by default Docusaurus combines CSS files in a way that doesn't play nicely with Scaladoc

@@ -1,4 +1,5 @@
 {
+  "license": "MPL-2.0",
   "scripts": {
     "examples": "docusaurus-examples",
     "start": "docusaurus-start",
