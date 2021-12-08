@@ -5,7 +5,15 @@
 | [![Project stage][Badge-Stage]][Link-Stage-Page] | [![Build Status][Badge-Circle]][Link-Circle] | [![Release Artifacts][Badge-SonatypeReleases]][Link-SonatypeReleases] | [![Snapshot Artifacts][Badge-SonatypeSnapshots]][Link-SonatypeSnapshots] | [![Badge-Discord]][Link-Discord] |
 
 # Summary
-TODO: Tagline
+
+A simple integration library between ZIO and diffx
+
+Currently only supports ZIO 1.x, but 2.x should be easy to support. As the code is
+minimal, a valid use-case might be to copy and paste the code into your
+repository, which should be fine given licensing under the MPL-2.0.
+
+zio-diffx cannot support Scala 3 until diffx artifacts are published, which
+appears to be a work-in-progress.
 
 # Documentation
 [zio-diffx Microsite](https://zio.github.io/zio-diffx/)
