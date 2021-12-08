@@ -1,9 +1,8 @@
 package zio.diffx
 
-import zio.test.*
-import zio.test.Assertion.Render.*
-
 import com.softwaremill.diffx.{ConsoleColorConfig, Diff}
+import zio.test.Assertion.Render.*
+import zio.test.*
 
 trait DiffxAssertions {
 

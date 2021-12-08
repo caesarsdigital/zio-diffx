@@ -1,10 +1,9 @@
 package zio.diffx
 
-import zio.UIO
-import zio.test._
-import zio.test.AssertionM.Render._
-
 import com.softwaremill.diffx.{ConsoleColorConfig, Diff}
+import zio.UIO
+import zio.test.AssertionM.Render.*
+import zio.test.*
 
 trait DiffxAssertionsM {
 
