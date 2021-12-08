@@ -15,17 +15,23 @@ object BuildHelper {
     import scala.jdk.CollectionConverters._
 
     val doc  = new Load(LoadSettings.builder().build())
-      .loadFromReader(scala.io.Source.fromFile(".github/workflows/ci.yml").bufferedReader())
-    val yaml = doc.asInstanceOf[JMap[String, JMap[String, JMap[String, JMap[String, JMap[String, JList[String]]]]]]]
-    val list = yaml.get("jobs").get("test").get("strategy").get("matrix").get("scala").asScala
+      .loadFromReader(
+        scala.io.Source.fromFile(".github/workflows/ci.yml").bufferedReader()
+      )
+    val yaml = doc.asInstanceOf[JMap[
+      String,
+      JMap[String, JMap[String, JMap[String, JMap[String, JList[String]]]]]
+    ]]
+    val list =
+      yaml.get("jobs").get("test").get("strategy").get("matrix").get("scala").asScala
     list.map(v => (v.split('.').take(2).mkString("."), v)).toMap
   }
-  val Scala211: String   = versions("2.11")
-  val Scala212: String   = versions("2.12")
-  val Scala213: String   = versions("2.13")
-  val ScalaDotty: String = versions("3.0")
+  val Scala211: String                      = versions("2.11")
+  val Scala212: String                      = versions("2.12")
+  val Scala213: String                      = versions("2.13")
+  val ScalaDotty: String                    = versions("3.1")
 
-  val SilencerVersion = "1.7.5"
+  val SilencerVersion = "1.7.7"
 
   private val stdOptions = Seq(
     "-deprecation",
@@ -61,7 +67,15 @@ object BuildHelper {
 
   def buildInfoSettings(packageName: String) =
     Seq(
-      buildInfoKeys := Seq[BuildInfoKey](organization, moduleName, name, version, scalaVersion, sbtVersion, isSnapshot),
+      buildInfoKeys    := Seq[BuildInfoKey](
+        organization,
+        moduleName,
+        name,
+        version,
+        scalaVersion,
+        sbtVersion,
+        isSnapshot
+      ),
       buildInfoPackage := packageName
     )
 
@@ -79,7 +93,7 @@ object BuildHelper {
       else
         Seq()
     },
-    Compile / doc / sources := {
+    Compile / doc / sources  := {
       val old = (Compile / doc / sources).value
       if (scalaVersion.value == ScalaDotty) {
         Nil
@@ -129,12 +143,12 @@ object BuildHelper {
     // One of -Ydelambdafy:inline or -Yrepl-class-based must be given to
     // avoid deadlocking on parallel operations, see
     //   https://issues.scala-lang.org/browse/SI-9076
-    Compile / console / scalacOptions := Seq(
+    Compile / console / scalacOptions   := Seq(
       "-Ypartial-unification",
       "-language:higherKinds",
       "-language:existentials",
       "-Yno-adapted-args",
-      "-Xsource:2.13",
+      "-Xsource:3",
       "-Yrepl-class-based"
     ),
     Compile / console / initialCommands := initialCommandsStr
@@ -149,7 +163,8 @@ object BuildHelper {
         )
       case Some((2, 13)) =>
         Seq(
-          "-Ywarn-unused:params,-implicits"
+          "-Ywarn-unused:params,-implicits",
+          "-Xsource:3"
         ) ++ std2xOptions ++ optimizerOptions(optimize)
       case Some((2, 12)) =>
         Seq(
@@ -187,14 +202,22 @@ object BuildHelper {
       case _             => Seq.empty
     }
 
-  def platformSpecificSources(platform: String, conf: String, baseDirectory: File)(versions: String*) = for {
+  def platformSpecificSources(platform: String, conf: String, baseDirectory: File)(
+    versions: String*
+  ) = for {
     platform <- List("shared", platform)
     version  <- "scala" :: versions.toList.map("scala-" + _)
-    result    = baseDirectory.getParentFile / platform.toLowerCase / "src" / conf / version
+    result    =
+      baseDirectory.getParentFile / platform.toLowerCase / "src" / conf / version
     if result.exists
   } yield result
 
-  def crossPlatformSources(scalaVer: String, platform: String, conf: String, baseDir: File) = {
+  def crossPlatformSources(
+    scalaVer: String,
+    platform: String,
+    conf: String,
+    baseDir: File
+  ) = {
     val versions = CrossVersion.partialVersion(scalaVer) match {
       case Some((2, 11)) =>
         List("2.11", "2.11+", "2.11-2.12", "2.x")
@@ -230,10 +253,13 @@ object BuildHelper {
   )
 
   def stdSettings(prjName: String) = Seq(
-    name := s"$prjName",
-    crossScalaVersions := Seq(Scala211, Scala212, Scala213),
-    ThisBuild / scalaVersion := Scala213,
-    scalacOptions := stdOptions ++ extraOptions(scalaVersion.value, optimize = !isSnapshot.value),
+    name                                   := s"$prjName",
+    crossScalaVersions                     := Seq(Scala211, Scala212, Scala213),
+    ThisBuild / scalaVersion               := Scala213,
+    scalacOptions                          := stdOptions ++ extraOptions(
+      scalaVersion.value,
+      optimize = !isSnapshot.value
+    ),
     libraryDependencies ++= {
       if (scalaVersion.value == ScalaDotty)
         Seq(
@@ -242,21 +268,28 @@ object BuildHelper {
       else
         Seq(
           "com.github.ghik" % "silencer-lib"            % SilencerVersion % Provided cross CrossVersion.full,
-          compilerPlugin("com.github.ghik" % "silencer-plugin" % SilencerVersion cross CrossVersion.full)
+          compilerPlugin(
+            "com.github.ghik" % "silencer-plugin" % SilencerVersion cross CrossVersion.full
+          )
         )
     },
-    semanticdbEnabled := scalaVersion.value != ScalaDotty, // enable SemanticDB
+    semanticdbEnabled                      := scalaVersion.value != ScalaDotty, // enable SemanticDB
     semanticdbOptions += "-P:semanticdb:synthetics:on",
-    semanticdbVersion := scalafixSemanticdb.revision, // use Scalafix compatible version
-    ThisBuild / scalafixScalaBinaryVersion := CrossVersion.binaryScalaVersion(scalaVersion.value),
+    semanticdbVersion                      := scalafixSemanticdb.revision,      // use Scalafix compatible version
+    ThisBuild / scalafixScalaBinaryVersion := CrossVersion.binaryScalaVersion(
+      scalaVersion.value
+    ),
     ThisBuild / scalafixDependencies ++= List(
       "com.github.liancheng" %% "organize-imports" % "0.5.0",
       "com.github.vovapolu"  %% "scaluzzi"         % "0.1.18"
     ),
-    Test / parallelExecution := true,
+    Test / parallelExecution               := true,
     incOptions ~= (_.withLogRecompileOnMacro(false)),
-    autoAPIMappings := true,
-    unusedCompileDependenciesFilter -= moduleFilter("org.scala-js", "scalajs-library")
+    autoAPIMappings                        := true,
+    unusedCompileDependenciesFilter -= moduleFilter(
+      "org.scala-js",
+      "scalajs-library"
+    )
   )
 
   def macroExpansionSettings = Seq(
@@ -269,7 +302,11 @@ object BuildHelper {
     libraryDependencies ++= {
       CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((2, x)) if x <= 12 =>
-          Seq(compilerPlugin(("org.scalamacros" % "paradise" % "2.1.1").cross(CrossVersion.full)))
+          Seq(
+            compilerPlugin(
+              ("org.scalamacros" % "paradise" % "2.1.1").cross(CrossVersion.full)
+            )
+          )
         case _                       => Seq.empty
       }
     }
@@ -293,8 +330,8 @@ object BuildHelper {
   )
 
   def nativeSettings = Seq(
-    Test / skip := true,
-    doc / skip := true,
+    Test / skip             := true,
+    doc / skip              := true,
     Compile / doc / sources := Seq.empty
   )
 
@@ -312,8 +349,10 @@ object BuildHelper {
 
     def header(text: String): String = s"${Console.RED}$text${Console.RESET}"
 
-    def item(text: String): String    = s"${Console.GREEN}> ${Console.CYAN}$text${Console.RESET}"
-    def subItem(text: String): String = s"  ${Console.YELLOW}> ${Console.CYAN}$text${Console.RESET}"
+    def item(text: String): String    =
+      s"${Console.GREEN}> ${Console.CYAN}$text${Console.RESET}"
+    def subItem(text: String): String =
+      s"  ${Console.YELLOW}> ${Console.CYAN}$text${Console.RESET}"
 
     s"""|${header(" ________ ___")}
         |${header("|__  /_ _/ _ \\")}

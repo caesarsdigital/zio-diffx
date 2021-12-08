@@ -1,21 +1,23 @@
 package zio.diffx
 
-// import munit.Assertions._
-// import munit.Location
-import zio._
-import zio.console._
-import zio.test.Assertion._
-import zio.test._
-import zio.test.environment._
-import zio.test.Assertion.Render._
+import zio.test.*
+import zio.test.Assertion.Render.*
 
 import com.softwaremill.diffx.{ConsoleColorConfig, Diff}
 
 trait DiffxAssertions {
 
-  def matchesTo[A: Diff](expected: A): Assertion[A] =
-    Assertion.assertionDirect("matchesTo")(param(expected)) { actual =>
+  val matchesToAssertionName = "matchesTo"
+
+  /**
+   * Just like isTrue from zio-test, but with a different name parameter
+   */
+  private def assertTrue[A](actual: A): Assertion[Boolean] =
+    Assertion.assertion(matchesToAssertionName)(param(actual))(identity(_))
+
+  def matchesTo[A: Diff](expected: A)(implicit c: ConsoleColorConfig): Assertion[A] =
+    Assertion.assertionDirect(matchesToAssertionName)(param(expected)) { actual =>
       val result = Diff.compare(expected, actual)
-      isTrue.label(result.show())(result.isIdentical)
+      assertTrue(actual).label(result.show())(result.isIdentical)
     }
 }

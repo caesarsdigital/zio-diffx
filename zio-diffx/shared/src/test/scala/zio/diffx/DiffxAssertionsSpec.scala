@@ -1,17 +1,9 @@
 package zio.diffx
 
-import com.softwaremill.diffx.generic.auto._
-import com.softwaremill.diffx._
+import com.softwaremill.diffx.generic.auto.*
 
-import java.io.IOException
-
-import zio._
-import zio.console._
-import zio.test.Assertion._
-import zio.test._
-import zio.test.environment._
-import com.softwaremill
-
+import zio.test.*
+import zio.test.Assertion.not
 object DiffxAssertionsSpec extends DefaultRunnableSpec with DiffxAssertions {
 
   sealed trait FBZ
@@ -33,7 +25,11 @@ object DiffxAssertionsSpec extends DefaultRunnableSpec with DiffxAssertions {
       assert(baz2)(matchesTo(baz1))
     },
     test("Diffx Assertions work as expected on nested classes: not matching") {
-      assert(baz3)(matchesTo(baz1))
+      // Remove the `not` calls to see the diffx error messages
+      assert(baz3)(not(matchesTo(baz1)))
+      && assert(baz4)(not(matchesTo(baz1)))
+      && assert(baz5)(not(matchesTo(baz1)))
+      && assert(baz6)(not(matchesTo(baz1)))
     }
   )
 }
