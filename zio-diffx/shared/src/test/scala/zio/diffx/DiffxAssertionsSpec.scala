@@ -12,7 +12,7 @@ import zio.test._
 import zio.test.environment._
 import com.softwaremill
 
-object HelloWorld {
+object DiffxAssertionsSpec extends DefaultRunnableSpec with DiffxAssertions {
 
   sealed trait FBZ
   final case class Foo(foo: Int)                        extends FBZ
@@ -28,22 +28,12 @@ object HelloWorld {
 
   val baz6 = Baz(Foo(4), Bar("barz"), 3.141)
 
-  def sayHello: ZIO[Console, IOException, Unit] =
-    console.putStrLn("Hello, World!")
-}
-
-object HelloWorldSpec extends DefaultRunnableSpec {
-
-  import HelloWorld._
-
-  val compareIt: softwaremill.diffx.DiffResult = compare(baz1, baz2)
-
   def spec: ZSpec[Environment, Failure] = suite("HelloWorldSpec")(
-    testM("sayHello correctly displays output") {
-      for {
-        _      <- sayHello
-        output <- TestConsole.output
-      } yield assert(output)(equalTo(Vector("Hello, World!\n")))
+    test("Diffx Assertions work as expected on nested classes: matching") {
+      assert(baz2)(matchesTo(baz1))
+    },
+    test("Diffx Assertions work as expected on nested classes: not matching") {
+      assert(baz3)(matchesTo(baz1))
     }
   )
 }

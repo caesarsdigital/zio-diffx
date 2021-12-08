@@ -46,8 +46,8 @@ lazy val root = project
   )
   .aggregate(
     zioDiffxJVM,
-    zioDiffxJS,
-    zioDiffxNative,
+    // zioDiffxJS,
+    // zioDiffxNative,
     docs
   )
 
@@ -60,25 +60,25 @@ lazy val zioDiffx = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     libraryDependencies ++= Seq(
       "dev.zio"                %% "zio"          % zioVersion,
       "dev.zio"                %% "zio-test"     % zioVersion % Test,
-      "dev.zio"                %% "zio-test-sbt" % zioVersion % Test,
-      "com.softwaremill.diffx" %% "diffx-core"   % "0.6.0"    % Test
+      "dev.zio"                %% "zio-test-sbt" % zioVersion,
+      "com.softwaremill.diffx" %% "diffx-core"   % "0.6.0"
     )
   )
   .settings(testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"))
   .enablePlugins(BuildInfoPlugin)
 
-lazy val zioDiffxJS = zioDiffx.js
+/* lazy val zioDiffxJS = zioDiffx.js
   .settings(jsSettings)
   .settings(libraryDependencies += "dev.zio" %%% "zio-test-sbt" % zioVersion % Test)
   .settings(scalaJSUseMainModuleInitializer := true)
-
+ */
 lazy val zioDiffxJVM = zioDiffx.jvm
   .settings(dottySettings)
   .settings(libraryDependencies += "dev.zio" %%% "zio-test-sbt" % zioVersion % Test)
   .settings(scalaReflectTestSettings)
-
+/*
 lazy val zioDiffxNative = zioDiffx.native
-  .settings(nativeSettings)
+  .settings(nativeSettings) */
 
 lazy val docs = project
   .in(file("zio-diffx-docs"))
