@@ -263,7 +263,8 @@ object BuildHelper {
       optimize = !isSnapshot.value
     ),
     libraryDependencies ++= {
-      if (scalaVersion.value == ScalaDotty)
+      if (1 == 0)
+        // if (scalaVersion.value == ScalaDotty)
         Seq(
           "com.github.ghik" % s"silencer-lib_$Scala213" % SilencerVersion % Provided
         )
@@ -275,9 +276,9 @@ object BuildHelper {
           )
         )
     },
-    semanticdbEnabled                      := scalaVersion.value != ScalaDotty, // enable SemanticDB
+    // semanticdbEnabled                      := scalaVersion.value != ScalaDotty, // enable SemanticDB
     semanticdbOptions += "-P:semanticdb:synthetics:on",
-    semanticdbVersion                      := scalafixSemanticdb.revision,      // use Scalafix compatible version
+    semanticdbVersion                      := scalafixSemanticdb.revision, // use Scalafix compatible version
     ThisBuild / scalafixScalaBinaryVersion := CrossVersion.binaryScalaVersion(
       scalaVersion.value
     ),
@@ -317,7 +318,8 @@ object BuildHelper {
   def macroDefinitionSettings = Seq(
     scalacOptions += "-language:experimental.macros",
     libraryDependencies ++= {
-      if (scalaVersion.value == ScalaDotty) Seq()
+      if (1 == 0) Seq()
+      // if (scalaVersion.value == ScalaDotty) Seq()
       else
         Seq(
           "org.scala-lang" % "scala-reflect"  % scalaVersion.value % "provided",
@@ -339,7 +341,8 @@ object BuildHelper {
 
   val scalaReflectTestSettings: List[Setting[_]] = List(
     libraryDependencies ++= {
-      if (scalaVersion.value == ScalaDotty)
+      if (1 == 0)
+        // if (scalaVersion.value == ScalaDotty)
         Seq("org.scala-lang" % "scala-reflect" % Scala213           % Test)
       else
         Seq("org.scala-lang" % "scala-reflect" % scalaVersion.value % Test)
