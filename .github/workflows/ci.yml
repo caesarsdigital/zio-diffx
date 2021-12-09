@@ -72,7 +72,8 @@ jobs:
 
   ci:
     runs-on: ubuntu-20.04
-    needs: [lint, mdoc, test]
+    # needs: [lint, mdoc, test]
+    needs: [lint, test] # TODO: skipping docs (mdoc) due to build github actions issue
     steps:
       - name: Aggregate of lint, and all tests
         run: echo "ci passed"
