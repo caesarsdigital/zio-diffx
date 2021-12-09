@@ -1,0 +1,4 @@
+install:
+  - sbt -v +publishM2
+env:
+  - SBT_OPTS: "-XX:MaxMetaspaceSize=512m"

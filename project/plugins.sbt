@@ -1,3 +1,5 @@
+resolvers += "jitpack" at "https://jitpack.io"
+
 addSbtPlugin("ch.epfl.scala"                     % "sbt-bloop"                     % "1.4.8")
 addSbtPlugin("ch.epfl.scala"                     % "sbt-scalafix"                  % "0.9.33")
 addSbtPlugin("com.eed3si9n"                      % "sbt-buildinfo"                 % "0.10.0")
@@ -15,5 +17,6 @@ addSbtPlugin("org.scalameta"                     % "sbt-mdoc"                   
 addSbtPlugin("org.scalameta"                     % "sbt-scalafmt"                  % "2.4.2")
 addSbtPlugin("pl.project13.scala"                % "sbt-jcstress"                  % "0.2.0")
 addSbtPlugin("pl.project13.scala"                % "sbt-jmh"                       % "0.4.0")
+// addSbtPlugin("com.github.dwickern"               % "sbt-classloader-leak-prevention" % "0.4") // FIXME: doesn't use scala version in artifact path
 
 libraryDependencies += "org.snakeyaml" % "snakeyaml-engine" % "2.3"

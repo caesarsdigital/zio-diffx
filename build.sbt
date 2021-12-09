@@ -53,7 +53,8 @@ lazy val root = project
     unusedCompileDependenciesFilter -= moduleFilter(
       "org.scala-js",
       "scalajs-library"
-    )
+    ),
+    resolvers += "jitpack" at "https://jitpack.io"
   )
   .aggregate(
     zioDiffxJVM
