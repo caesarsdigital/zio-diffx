@@ -56,10 +56,10 @@ lazy val root = project
     )
   )
   .aggregate(
-    zioDiffxJVM,
+    zioDiffxJVM
     // zioDiffxJS,
     // zioDiffxNative,
-    docs
+    // docs
   )
 
 lazy val zioDiffx = crossProject(JSPlatform, JVMPlatform, NativePlatform)
