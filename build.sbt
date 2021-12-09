@@ -91,6 +91,7 @@ lazy val zioDiffxJVM = zioDiffx.jvm
 lazy val zioDiffxNative = zioDiffx.native
   .settings(nativeSettings) */
 
+/*
 lazy val docs = project
   .in(file("zio-diffx-docs"))
   .settings(stdSettings("zio-diffx"))
@@ -109,3 +110,4 @@ lazy val docs = project
   )
   .dependsOn(zioDiffxJVM)
   .enablePlugins(MdocPlugin, DocusaurusPlugin, ScalaUnidocPlugin)
+ */
