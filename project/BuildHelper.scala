@@ -29,7 +29,7 @@ object BuildHelper {
 //  val Scala211: String                      = versions("2.11")
 //  val Scala212: String                      = versions("2.12")
   val Scala213: String                      = versions("2.13")
-//  val ScalaDotty: String                    = versions("3.1")
+// val ScalaDotty: String                    = versions("3.1")
 
   val SilencerVersion = "1.7.7"
 
@@ -79,6 +79,7 @@ object BuildHelper {
       buildInfoPackage := packageName
     )
 
+  /*
   val dottySettings = Seq(
     crossScalaVersions += ScalaDotty,
     scalacOptions ++= {
@@ -110,6 +111,7 @@ object BuildHelper {
       }
     }
   )
+   */
 
   val scalaReflectSettings = Seq(
     libraryDependencies ++= Seq("dev.zio" %%% "izumi-reflect" % "1.0.0-M10")

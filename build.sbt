@@ -84,7 +84,7 @@ lazy val zioDiffx = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .settings(scalaJSUseMainModuleInitializer := true)
  */
 lazy val zioDiffxJVM = zioDiffx.jvm
-  .settings(dottySettings)
+  // .settings(dottySettings)
   .settings(libraryDependencies += "dev.zio" %%% "zio-test-sbt" % zioVersion % Test)
   .settings(scalaReflectTestSettings)
 /*
