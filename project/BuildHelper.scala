@@ -277,6 +277,7 @@ object BuildHelper {
         )
     },
     // semanticdbEnabled                      := scalaVersion.value != ScalaDotty, // enable SemanticDB
+    semanticdbEnabled                      := true,                        // TODO: until scala3 is supported
     semanticdbOptions += "-P:semanticdb:synthetics:on",
     semanticdbVersion                      := scalafixSemanticdb.revision, // use Scalafix compatible version
     ThisBuild / scalafixScalaBinaryVersion := CrossVersion.binaryScalaVersion(
