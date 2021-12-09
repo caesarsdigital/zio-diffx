@@ -3,16 +3,16 @@ import BuildHelper._
 inThisBuild(
   List(
     organization  := "dev.zio",
-    homepage      := Some(url("https://zio.github.io/zio-diffx/")),
+    homepage      := Some(url("https://bbarker.github.io/zio-diffx/")),
     licenses      := List(
-      "Apache-2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")
+      "MPL-2.0" -> url("https://www.mozilla.org/en-US/MPL/2.0/")
     ),
     developers    := List(
       Developer(
-        "jdegoes",
-        "John De Goes",
-        "john@degoes.net",
-        url("http://degoes.net")
+        "bbarker",
+        "Brandon Barker",
+        "brandon.barker@gmail.com",
+        url("https://twitter.com/b_barker")
       )
     ),
     pgpPassphrase := sys.env.get("PGP_PASSWORD").map(_.toArray),
