@@ -15,8 +15,25 @@ repository, which should be fine given licensing under the MPL-2.0.
 zio-diffx cannot support Scala 3 until diffx artifacts are published, which
 appears to be a work-in-progress.
 
+# Dependency Coordinates
+
+Make sure jitpack is in your resolvers, e.g.:
+
+```scala
+  resolvers ++= Seq(
+    "jitpack.io" at "https://jitpack.io/",
+  ),
+```
+
+The general suggestion is to use the most recent release listed on the
+GitHub releases page for the project (not necessarily what is shown below):
+
+```scala
+"io.github.bbarker" %% "zio-diffx" % "0.0.5" % Test
+```
+
 # Documentation
-[zio-diffx Microsite](https://zio.github.io/zio-diffx/)
+[blog page on Medium](https://medium.com/@brandon.barker/zio-test-and-diffx-integration-42c003eb709)
 
 # Contributing
 [Documentation for contributors](https://zio.github.io/zio-diffx/docs/about/about_contributing)
