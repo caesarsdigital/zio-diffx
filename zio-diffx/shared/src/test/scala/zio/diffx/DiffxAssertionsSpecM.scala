@@ -4,7 +4,13 @@ import com.softwaremill.diffx.generic.auto.*
 import zio.UIO
 import zio.test.AssertionM.not
 import zio.test.*
-object DiffxAssertionsSpecM extends DefaultRunnableSpec with DiffxAssertionsM {
+
+// Compile time check for both effectful and non-effectful assertions
+// being used together: DiffxAssertionsM with DiffxAssertions
+object DiffxAssertionsSpecM
+    extends DefaultRunnableSpec
+    with DiffxAssertionsM
+    with DiffxAssertions /* not used here; see above comment */ {
 
   sealed trait FBZ
   final case class Foo(foo: Int)                        extends FBZ
@@ -22,14 +28,14 @@ object DiffxAssertionsSpecM extends DefaultRunnableSpec with DiffxAssertionsM {
 
   def spec: ZSpec[Environment, Failure] = suite("HelloWorldSpec")(
     testM("Diffx Assertions work as expected on nested classes: matching") {
-      assertM(baz2)(matchesTo(baz1))
+      assertM(baz2)(matchesToM(baz1))
     },
     testM("Diffx Assertions work as expected on nested classes: not matching") {
       for {
-        a1 <- assertM(baz3)(not(matchesTo(baz1)))
-        a2 <- assertM(baz4)(not(matchesTo(baz1)))
-        a3 <- assertM(baz5)(not(matchesTo(baz1)))
-        a4 <- assertM(baz6)(not(matchesTo(baz1)))
+        a1 <- assertM(baz3)(not(matchesToM(baz1)))
+        a2 <- assertM(baz4)(not(matchesToM(baz1)))
+        a3 <- assertM(baz5)(not(matchesToM(baz1)))
+        a4 <- assertM(baz6)(not(matchesToM(baz1)))
       } yield (a1 && a2 && a3 && a4)
     }
   )
