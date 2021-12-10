@@ -6,7 +6,7 @@
 
 # Summary
 
-A simple integration library between ZIO and diffx
+A simple integration library between ZIO and [diffx](https://github.com/softwaremill/diffx).
 
 Currently only supports ZIO 1.x, but 2.x should be easy to support. As the code is
 minimal, a valid use-case might be to copy and paste the code into your
