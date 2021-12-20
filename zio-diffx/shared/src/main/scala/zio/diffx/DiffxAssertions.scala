@@ -12,7 +12,7 @@ trait DiffxAssertions {
    * Just like isTrue from zio-test, but with a different name parameter
    */
   private def assertTrue[A](actual: A): Assertion[Boolean] =
-    Assertion.assertion(matchesToAssertionName)(param(actual))(identity)
+    Assertion.assertion(matchesToAssertionName)(param(actual))(identity(_))
 
   def matchesTo[A: Diff](expected: A)(implicit
     c: ConsoleColorConfig
