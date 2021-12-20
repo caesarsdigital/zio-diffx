@@ -25,7 +25,7 @@ object DiffxAssertionsSpec extends DefaultRunnableSpec with DiffxAssertions {
     },
     test("Diffx Assertions work as expected on nested classes: not matching") {
       // Remove the `not` calls to see the diffx error messages
-      assert(baz3)(not(matchesTo(baz1)))
+      assert(baz3)((matchesTo(baz1)))
       && assert(baz4)(not(matchesTo(baz1)))
       && assert(baz5)(not(matchesTo(baz1)))
       && assert(baz6)(not(matchesTo(baz1)))

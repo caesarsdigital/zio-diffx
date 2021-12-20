@@ -1,8 +1,8 @@
 package zio.diffx
 
-import com.softwaremill.diffx.{ConsoleColorConfig, Diff}
-import zio.test.Assertion.Render.*
+import com.softwaremill.diffx.{ConsoleColorConfig, Diff, IdenticalValue}
 import zio.test.*
+import zio.test.Assertion.Render.*
 
 trait DiffxAssertions {
 
@@ -12,11 +12,14 @@ trait DiffxAssertions {
    * Just like isTrue from zio-test, but with a different name parameter
    */
   private def assertTrue[A](actual: A): Assertion[Boolean] =
-    Assertion.assertion(matchesToAssertionName)(param(actual))(identity(_))
+    Assertion.assertion(matchesToAssertionName)(param(actual))(identity)
 
-  def matchesTo[A: Diff](expected: A)(implicit c: ConsoleColorConfig): Assertion[A] =
+  def matchesTo[A: Diff](expected: A)(implicit
+    c: ConsoleColorConfig
+  ): Assertion[A] =
     Assertion.assertionDirect(matchesToAssertionName)(param(expected)) { actual =>
       val result = Diff.compare(expected, actual)
-      assertTrue(actual).label(result.show())(result.isIdentical)
+      if (result.isIdentical) assertTrue(actual)(result.isIdentical)
+      else assertTrue(result.show())(result.isIdentical)
     }
 }
