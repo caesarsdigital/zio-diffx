@@ -1,6 +1,6 @@
 package zio.diffx
 
-import com.softwaremill.diffx.{ConsoleColorConfig, Diff}
+import com.softwaremill.diffx.Diff
 import zio.UIO
 import zio.test.AssertionM.Render.*
 import zio.test.*
@@ -15,9 +15,7 @@ trait DiffxAssertionsM {
   private def assertTrueM[A](actual: UIO[A]): AssertionM[Boolean] =
     AssertionM.assertionM(matchesToAssertionNameM)(param(actual))(identity(UIO(_)))
 
-  def matchesToM[A: Diff](expected: A)(implicit
-    c: ConsoleColorConfig
-  ): AssertionM[A] =
+  def matchesToM[A: Diff](expected: A): AssertionM[A] =
     AssertionM.assertionDirect(matchesToAssertionNameM)(param(expected)) { actual =>
       val result = Diff.compare(expected, actual)
       assertTrueM(UIO(actual)).label(result.show()).runM(result.isIdentical)

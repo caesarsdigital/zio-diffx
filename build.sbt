@@ -73,7 +73,7 @@ lazy val zioDiffx = crossProject(JSPlatform, JVMPlatform, NativePlatform)
       "dev.zio"                %% "zio"          % zioVersion,
       "dev.zio"                %% "zio-test"     % zioVersion % Test,
       "dev.zio"                %% "zio-test-sbt" % zioVersion,
-      "com.softwaremill.diffx" %% "diffx-core"   % "0.6.0"
+      "com.softwaremill.diffx" %% "diffx-core"   % "0.7.0"
     )
   )
   .settings(testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"))
