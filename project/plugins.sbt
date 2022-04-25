@@ -11,12 +11,12 @@ addSbtPlugin("com.typesafe"                      % "sbt-mima-plugin"            
 addSbtPlugin("de.heikoseeberger"                 % "sbt-header"                    % "5.6.0")
 addSbtPlugin("org.portable-scala"                % "sbt-scala-native-crossproject" % "1.2.0")
 addSbtPlugin("org.portable-scala"                % "sbt-scalajs-crossproject"      % "1.2.0")
-addSbtPlugin("org.scala-js"                      % "sbt-scalajs"                   % "1.5.1")
+addSbtPlugin("org.scala-js"                      % "sbt-scalajs"                   % "1.10.0")
 addSbtPlugin("org.scala-native"                  % "sbt-scala-native"              % "0.4.2")
-addSbtPlugin("org.scalameta"                     % "sbt-mdoc"                      % "2.2.20")
-addSbtPlugin("org.scalameta"                     % "sbt-scalafmt"                  % "2.4.2")
+addSbtPlugin("org.scalameta"                     % "sbt-mdoc"                      % "2.2.24")
+addSbtPlugin("org.scalameta"                     % "sbt-scalafmt"                  % "2.4.6")
 addSbtPlugin("pl.project13.scala"                % "sbt-jcstress"                  % "0.2.0")
-addSbtPlugin("pl.project13.scala"                % "sbt-jmh"                       % "0.4.0")
+addSbtPlugin("pl.project13.scala"                % "sbt-jmh"                       % "0.4.3")
 // addSbtPlugin("com.github.dwickern"               % "sbt-classloader-leak-prevention" % "0.4") // FIXME: doesn't use scala version in artifact path
 
 libraryDependencies += "org.snakeyaml" % "snakeyaml-engine" % "2.3"
