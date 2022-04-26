@@ -44,7 +44,7 @@ addCommandAlias(
   ";zioDiffxNative/test:compile"
 )
 
-val zioVersion = "1.0.9"
+val zioVersion = "1.0.14"
 
 lazy val root = project
   .in(file("."))
