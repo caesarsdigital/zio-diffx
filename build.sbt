@@ -44,7 +44,7 @@ addCommandAlias(
   ";zioDiffxNative/test:compile"
 )
 
-val zioVersion = "1.0.9"
+val zioVersion = "1.0.14"
 
 lazy val root = project
   .in(file("."))
@@ -73,7 +73,7 @@ lazy val zioDiffx = crossProject(JSPlatform, JVMPlatform, NativePlatform)
       "dev.zio"                %% "zio"          % zioVersion,
       "dev.zio"                %% "zio-test"     % zioVersion % Test,
       "dev.zio"                %% "zio-test-sbt" % zioVersion,
-      "com.softwaremill.diffx" %% "diffx-core"   % "0.7.0"
+      "com.softwaremill.diffx" %% "diffx-core"   % "0.7.1"
     )
   )
   .settings(testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"))

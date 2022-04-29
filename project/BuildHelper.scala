@@ -285,7 +285,7 @@ object BuildHelper {
     ),
     ThisBuild / scalafixDependencies ++= List(
       "com.github.liancheng" %% "organize-imports" % "0.5.0",
-      "com.github.vovapolu"  %% "scaluzzi"         % "0.1.18"
+      "com.github.vovapolu"  %% "scaluzzi"         % "0.1.21"
     ),
     Test / parallelExecution               := true,
     incOptions ~= (_.withLogRecompileOnMacro(false)),
