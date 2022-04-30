@@ -1,7 +1,7 @@
 resolvers += "jitpack" at "https://jitpack.io"
 
 addSbtPlugin("ch.epfl.scala"                     % "sbt-bloop"                     % "1.5.0")
-addSbtPlugin("ch.epfl.scala"                     % "sbt-scalafix"                  % "0.9.33")
+addSbtPlugin("ch.epfl.scala"                     % "sbt-scalafix"                  % "0.9.34")
 addSbtPlugin("com.eed3si9n"                      % "sbt-buildinfo"                 % "0.10.0")
 addSbtPlugin("com.eed3si9n"                      % "sbt-unidoc"                    % "0.4.3")
 addSbtPlugin("com.geirsson"                      % "sbt-ci-release"                % "1.5.7")
