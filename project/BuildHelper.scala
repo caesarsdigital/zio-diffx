@@ -31,7 +31,7 @@ object BuildHelper {
   val Scala213: String                      = versions("2.13")
 // val ScalaDotty: String                    = versions("3.1")
 
-  val SilencerVersion = "1.7.7"
+  val SilencerVersion = "1.7.8"
 
   private val stdOptions = Seq(
     "-deprecation",
@@ -284,8 +284,8 @@ object BuildHelper {
       scalaVersion.value
     ),
     ThisBuild / scalafixDependencies ++= List(
-      "com.github.liancheng" %% "organize-imports" % "0.5.0",
-      "com.github.vovapolu"  %% "scaluzzi"         % "0.1.18"
+      "com.github.liancheng" %% "organize-imports" % "0.6.0",
+      "com.github.vovapolu"  %% "scaluzzi"         % "0.1.21"
     ),
     Test / parallelExecution               := true,
     incOptions ~= (_.withLogRecompileOnMacro(false)),
