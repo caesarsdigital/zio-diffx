@@ -374,7 +374,9 @@ object BuildHelper {
         |${item("~compileJVM")} - Compiles all JVM modules (file-watch enabled)
         |${item("testJVM")} - Runs all JVM tests
         |${item("testJS")} - Runs all ScalaJS tests
-        |${item("testOnly *.YourSpec -- -t \"YourLabel\"")} - Only runs tests with matching term e.g.
+        |${item(
+         "testOnly *.YourSpec -- -t \"YourLabel\""
+       )} - Only runs tests with matching term e.g.
         |${subItem("coreTestsJVM/testOnly *.ZIOSpec -- -t \"happy-path\"")}
         |${item("docs/docusaurusCreateSite")} - Generates the ZIO microsite
       """.stripMargin
