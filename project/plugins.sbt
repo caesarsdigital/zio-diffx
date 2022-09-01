@@ -19,4 +19,4 @@ addSbtPlugin("pl.project13.scala"                % "sbt-jcstress"               
 addSbtPlugin("pl.project13.scala"                % "sbt-jmh"                       % "0.4.3")
 // addSbtPlugin("com.github.dwickern"               % "sbt-classloader-leak-prevention" % "0.4") // FIXME: doesn't use scala version in artifact path
 
-libraryDependencies += "org.snakeyaml" % "snakeyaml-engine" % "2.3"
+libraryDependencies += "org.snakeyaml" % "snakeyaml-engine" % "2.4"
