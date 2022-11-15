@@ -1,5 +1,7 @@
 # zio-diffx
 
+## In light of ZIO 2's ability to perform diffing in zio-test, this project has been archived.
+
 | Project Stage | CI | Release | Snapshot | Discord |
 | --- | --- | --- | --- | --- |
 | [![Project stage][Badge-Stage]][Link-Stage-Page] | [![Build Status][Badge-Circle]][Link-Circle] | [![Release Artifacts][Badge-SonatypeReleases]][Link-SonatypeReleases] | [![Snapshot Artifacts][Badge-SonatypeSnapshots]][Link-SonatypeSnapshots] | [![Badge-Discord]][Link-Discord] |
